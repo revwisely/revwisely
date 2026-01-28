@@ -207,6 +207,24 @@
   .progress-step.active .step-number {
     background: rgba(255,255,255,0.3);
   }
+  a.progress-step {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #666;
+  }
+  a.progress-step:hover:not(.active) {
+    background: #e0e3e8;
+  }
+  a.progress-step.active {
+    color: #fff;
+  }
+  a.progress-step span {
+    color: inherit;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   @media (max-width: 768px) {
     .form-row, .form-row-3 {
       grid-template-columns: 1fr;
@@ -278,24 +296,24 @@
   </div>
 
   <!-- Progress Indicator -->
-  <div style="background: #fff; padding: 30px 5% 0;">
+  <div id="progress-nav" style="background: #fff; padding: 30px 5% 0; position: sticky; top: 0; z-index: 100;">
     <div class="progress-indicator">
-      <div class="progress-step active">
+      <a href="#section-personal" class="progress-step active" data-section="1">
         <span class="step-number">1</span>
-        <span>Personal Info</span>
-      </div>
-      <div class="progress-step">
+        <span>Personal Information</span>
+      </a>
+      <a href="#section-experience" class="progress-step" data-section="2">
         <span class="step-number">2</span>
-        <span>Experience</span>
-      </div>
-      <div class="progress-step">
+        <span>Work History and Requirements</span>
+      </a>
+      <a href="#section-expertise" class="progress-step" data-section="3">
         <span class="step-number">3</span>
         <span>Expertise</span>
-      </div>
-      <div class="progress-step">
+      </a>
+      <a href="#section-resume" class="progress-step" data-section="4">
         <span class="step-number">4</span>
-        <span>Availability</span>
-      </div>
+        <span>Upload Your Resume</span>
+      </a>
     </div>
   </div>
 
@@ -303,7 +321,7 @@
   <form id="consultant-profile-form" name="consultant-profile-form" data-name="Consultant Profile Form" method="post" action="#" enctype="multipart/form-data">
 
     <!-- Section 1: Personal Information -->
-    <div class="profile-form-section">
+    <div id="section-personal" class="profile-form-section">
       <div class="w-layout-blockcontainer w-container">
         <div class="profile-section-header">
           <h3>Personal Information</h3>
@@ -350,11 +368,11 @@
       </div>
     </div>
 
-    <!-- Section 2: Professional Background -->
-    <div class="profile-form-section">
+    <!-- Section 2: Work History and Requirements -->
+    <div id="section-experience" class="profile-form-section">
       <div class="w-layout-blockcontainer w-container">
         <div class="profile-section-header">
-          <h3>Professional Background</h3>
+          <h3>Work History and Requirements</h3>
           <p>Tell us about your experience. We want to understand where you've been and what you've accomplished.</p>
         </div>
 
@@ -398,25 +416,11 @@
           <label>Professional Summary <span class="required">*</span></label>
           <textarea name="summary" required placeholder="In 3-5 sentences, tell us about your professional background. What types of problems have you solved? What are you known for? What impact have you made?"></textarea>
         </div>
-
-        <div class="form-group">
-          <label>Upload Your Resume/CV <span class="required">*</span></label>
-          <label class="file-upload-area">
-            <input type="file" name="resume" accept=".pdf,.doc,.docx" required/>
-            <div class="file-upload-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,12L16,16H13.5V19H10.5V16H8L12,12Z"/></svg>
-            </div>
-            <div class="file-upload-text">
-              <strong>Click to upload</strong> or drag and drop
-            </div>
-            <div class="file-upload-hint">PDF, DOC, or DOCX (max 10MB)</div>
-          </label>
-        </div>
       </div>
     </div>
 
     <!-- Section 3: Areas of Expertise -->
-    <div class="profile-form-section">
+    <div id="section-expertise" class="profile-form-section">
       <div class="w-layout-blockcontainer w-container">
         <div class="profile-section-header">
           <h3>Areas of Expertise</h3>
@@ -506,52 +510,26 @@
       </div>
     </div>
 
-    <!-- Section 4: Availability & Preferences -->
-    <div class="profile-form-section">
+    <!-- Section 4: Upload Your Resume -->
+    <div id="section-resume" class="profile-form-section">
       <div class="w-layout-blockcontainer w-container">
         <div class="profile-section-header">
-          <h3>Availability & Preferences</h3>
-          <p>Help us understand your availability and how you prefer to work.</p>
-        </div>
-
-        <div class="form-row-3">
-          <div class="form-group">
-            <label>When are you available to start? <span class="required">*</span></label>
-            <select name="availability_start" required>
-              <option value="">Select availability</option>
-              <option value="immediately">Immediately</option>
-              <option value="2_weeks">Within 2 weeks</option>
-              <option value="1_month">Within 1 month</option>
-              <option value="2_months">Within 2 months</option>
-              <option value="3_months_plus">3+ months</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Hours per week available <span class="required">*</span></label>
-            <select name="hours_available" required>
-              <option value="">Select hours</option>
-              <option value="10-20">10-20 hours/week</option>
-              <option value="20-30">20-30 hours/week</option>
-              <option value="30-40">30-40 hours/week</option>
-              <option value="40+">40+ hours/week (full-time)</option>
-              <option value="flexible">Flexible / Project-based</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Work Location Preference <span class="required">*</span></label>
-            <select name="work_preference" required>
-              <option value="">Select preference</option>
-              <option value="remote">Remote only</option>
-              <option value="hybrid">Hybrid (remote + occasional on-site)</option>
-              <option value="onsite">On-site preferred</option>
-              <option value="flexible">Flexible / No preference</option>
-            </select>
-          </div>
+          <h3>Upload Your Resume</h3>
+          <p>Upload your resume or CV so we can better understand your background and qualifications.</p>
         </div>
 
         <div class="form-group">
-          <label>Target Hourly Rate (USD)</label>
-          <input type="text" name="hourly_rate" placeholder="e.g., $150-200/hour"/>
+          <label>Upload Your Resume/CV <span class="required">*</span></label>
+          <label class="file-upload-area">
+            <input type="file" name="resume" accept=".pdf,.doc,.docx" required/>
+            <div class="file-upload-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,12L16,16H13.5V19H10.5V16H8L12,12Z"/></svg>
+            </div>
+            <div class="file-upload-text">
+              <strong>Click to upload</strong> or drag and drop
+            </div>
+            <div class="file-upload-hint">PDF, DOC, or DOCX (max 10MB)</div>
+          </label>
         </div>
 
         <div class="form-group">
@@ -694,16 +672,43 @@ document.getElementById('consultant-profile-form').addEventListener('submit', fu
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// Smooth scroll with offset for sticky header
+document.querySelectorAll('.progress-step').forEach(step => {
+  step.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+    const progressNav = document.getElementById('progress-nav');
+    const offset = progressNav.offsetHeight + 20;
+    
+    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
+    
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  });
+});
+
 // Update progress indicator based on scroll position
 document.addEventListener('scroll', function() {
-  const sections = document.querySelectorAll('.profile-form-section');
+  const sections = [
+    document.getElementById('section-personal'),
+    document.getElementById('section-experience'),
+    document.getElementById('section-expertise'),
+    document.getElementById('section-resume')
+  ];
   const progressSteps = document.querySelectorAll('.progress-step');
+  const progressNav = document.getElementById('progress-nav');
+  const offset = progressNav ? progressNav.offsetHeight + 50 : 100;
 
   let currentSection = 0;
   sections.forEach((section, index) => {
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight / 2) {
-      currentSection = index;
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < offset + 100) {
+        currentSection = index;
+      }
     }
   });
 
