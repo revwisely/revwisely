@@ -651,8 +651,8 @@ document.querySelector('input[type="file"]').addEventListener('change', function
   }
 });
 
-// Form submission handling (placeholder - you'll need to connect to your backend)
-document.getElementById('consultant-profile-form').addEventListener('submit', function(e) {
+// Form submission handling - submits to Airtable via API
+document.getElementById('consultant-profile-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   // Validate at least one expertise is selected
@@ -662,14 +662,69 @@ document.getElementById('consultant-profile-form').addEventListener('submit', fu
     return;
   }
 
-  // Here you would typically send the form data to your backend
-  // For now, we'll just show the success message
-  document.getElementById('consultant-profile-form').style.display = 'none';
-  document.querySelector('.progress-indicator').parentElement.style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
+  // Get the submit button and show loading state
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
 
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    // Collect form data
+    const formData = {
+      first_name: this.querySelector('[name="first_name"]').value,
+      last_name: this.querySelector('[name="last_name"]').value,
+      email: this.querySelector('[name="email"]').value,
+      phone: this.querySelector('[name="phone"]').value,
+      city: this.querySelector('[name="city"]').value,
+      state_country: this.querySelector('[name="state_country"]').value,
+      linkedin: this.querySelector('[name="linkedin"]').value,
+      job_title: this.querySelector('[name="job_title"]').value,
+      company: this.querySelector('[name="company"]').value,
+      years_experience: this.querySelector('[name="years_experience"]').value,
+      education: this.querySelector('[name="education"]').value,
+      summary: this.querySelector('[name="summary"]').value,
+      expertise: Array.from(document.querySelectorAll('input[name="expertise[]"]:checked')).map(cb => cb.nextElementSibling.textContent.trim()),
+      tools: this.querySelector('[name="tools"]').value,
+      industries: Array.from(document.querySelectorAll('input[name="industries[]"]:checked')).map(cb => cb.nextElementSibling.textContent.trim()),
+      referral_source: this.querySelector('[name="referral_source"]').value,
+      additional_info: this.querySelector('[name="additional_info"]').value
+    };
+
+    // Handle resume file - convert to base64 for now (note: for production, use a file upload service)
+    const resumeInput = this.querySelector('[name="resume"]');
+    if (resumeInput.files.length > 0) {
+      // For now, we'll note that a resume was uploaded but can't attach it directly
+      // A proper solution would use Cloudinary, S3, or similar
+      formData.resume_note = 'Resume uploaded: ' + resumeInput.files[0].name;
+    }
+
+    // Submit to API
+    const response = await fetch('/api/submit-application', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      // Show success message
+      document.getElementById('consultant-profile-form').style.display = 'none';
+      document.querySelector('.progress-indicator').parentElement.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error(result.error || 'Failed to submit application');
+    }
+
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('There was an error submitting your application. Please try again or contact us directly at info@revwisely.com');
+    submitBtn.textContent = originalBtnText;
+    submitBtn.disabled = false;
+  }
 });
 
 // Smooth scroll with offset for sticky header
