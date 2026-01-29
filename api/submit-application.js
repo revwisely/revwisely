@@ -44,9 +44,12 @@ export default async function handler(req, res) {
       'Status': 'New'
     };
 
-    // Handle resume file if provided (base64 encoded)
+    // Handle resume file - Uploadcare provides a CDN URL
     if (data.resume_url) {
-      fields['Resume'] = [{ url: data.resume_url }];
+      fields['Resume'] = [{ 
+        url: data.resume_url,
+        filename: data.resume_name || 'resume.pdf'
+      }];
     }
 
     // Submit to Airtable

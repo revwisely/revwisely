@@ -1,5 +1,13 @@
 <!DOCTYPE html><!-- Last Published: Thu Jan 23 2026 12:00:00 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="revwisely.com" data-wf-page="consultant-profile-2026" data-wf-site="65b7e5af87c2a7ef0406702f" lang="en"><head><meta charset="utf-8"/><title>Consultant Profile | Revwisely</title><meta content="Complete your consultant profile to join Revwisely's talent community. We match experienced practitioners with meaningful, high-impact client work." name="description"/><meta content="Consultant Profile | Revwisely" property="og:title"/><meta content="Complete your consultant profile to join Revwisely's talent community. We match experienced practitioners with meaningful, high-impact client work." property="og:description"/><meta content="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/65eb7ed7902625dd370fbe5d_Screenshot%202024-03-08%20at%201.09.57%E2%80%AFPM.png" property="og:image"/><meta content="Consultant Profile | Revwisely" property="twitter:title"/><meta content="Complete your consultant profile to join Revwisely's talent community. We match experienced practitioners with meaningful, high-impact client work." property="twitter:description"/><meta content="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/65eb7ed7902625dd370fbe5d_Screenshot%202024-03-08%20at%201.09.57%E2%80%AFPM.png" property="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><link href="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/css/revwisely.webflow.shared.ed0a351f2.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/65cbc0fcc36efa12cd44a2a2_Rev32.png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/65cbc09c14cd5d7d1a62d849_Rev256.png" rel="apple-touch-icon"/><script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script><script>!function () {var reb2b = window.reb2b = window.reb2b || [];if (reb2b.invoked) return;reb2b.invoked = true;reb2b.methods = ["identify", "collect"];reb2b.factory = function (method) {return function () {var args = Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b;};};for (var i = 0; i < reb2b.methods.length; i++) {var key = reb2b.methods[i];reb2b[key] = reb2b.factory(key);}reb2b.load = function (key) {var script = document.createElement("script");script.type = "text/javascript";script.async = true;script.src = "https://s3-us-west-2.amazonaws.com/b2bjsstore/b/" + key + "/reb2b.js.gz";var first = document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script, first);};reb2b.SNIPPET_VERSION = "1.0.1";reb2b.load("L9NMMZHKZ8NW");}();</script>
 
+<!-- Uploadcare Widget for Resume Uploads -->
+<script>
+  UPLOADCARE_PUBLIC_KEY = 'demopublickey';
+  UPLOADCARE_TABS = 'file gdrive dropbox url';
+  UPLOADCARE_CLEARABLE = true;
+</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLEJMYD2P4"></script>
 <script>
@@ -520,16 +528,19 @@
 
         <div class="form-group">
           <label>Upload Your Resume/CV <span class="required">*</span></label>
-          <label class="file-upload-area">
-            <input type="file" name="resume" accept=".pdf,.doc,.docx" required/>
-            <div class="file-upload-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M12,12L16,16H13.5V19H10.5V16H8L12,12Z"/></svg>
-            </div>
-            <div class="file-upload-text">
-              <strong>Click to upload</strong> or drag and drop
-            </div>
-            <div class="file-upload-hint">PDF, DOC, or DOCX (max 10MB)</div>
-          </label>
+          <input type="hidden" name="resume_url" id="resume_url" required />
+          <div class="resume-upload-wrapper" style="margin-top: 10px;">
+            <input type="hidden" role="uploadcare-uploader" 
+                   id="resume-uploader"
+                   data-public-key="demopublickey"
+                   data-tabs="file gdrive dropbox url"
+                   data-preview-step="true"
+                   data-clearable="true"
+                   data-file-types="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                   data-max-file-size="10485760"
+            />
+          </div>
+          <p style="color: #666; font-size: 13px; margin-top: 10px;">Accepted formats: PDF, DOC, DOCX (max 10MB). You can also upload from Google Drive or Dropbox.</p>
         </div>
 
         <div class="form-group">
@@ -642,13 +653,30 @@
 <script src="https://cdn.prod.website-files.com/65b7e5af87c2a7ef0406702f/js/webflow.74606fb0.957c564953164269.js" type="text/javascript"></script>
 
 <script>
-// File upload display
-document.querySelector('input[type="file"]').addEventListener('change', function(e) {
-  const fileName = e.target.files[0]?.name;
-  if (fileName) {
-    const uploadArea = this.closest('.file-upload-area');
-    uploadArea.querySelector('.file-upload-text').innerHTML = '<strong>' + fileName + '</strong> selected';
-  }
+// Initialize Uploadcare widget and capture file URL
+let resumeFileUrl = null;
+let resumeFileName = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize the Uploadcare widget
+  const widget = uploadcare.Widget('#resume-uploader');
+  
+  // Listen for file upload completion
+  widget.onUploadComplete(function(fileInfo) {
+    resumeFileUrl = fileInfo.cdnUrl;
+    resumeFileName = fileInfo.name;
+    document.getElementById('resume_url').value = resumeFileUrl;
+    console.log('Resume uploaded:', resumeFileName, resumeFileUrl);
+  });
+
+  // Listen for file removal
+  widget.onChange(function(file) {
+    if (!file) {
+      resumeFileUrl = null;
+      resumeFileName = null;
+      document.getElementById('resume_url').value = '';
+    }
+  });
 });
 
 // Form submission handling - submits to Airtable via API
@@ -659,6 +687,12 @@ document.getElementById('consultant-profile-form').addEventListener('submit', as
   const expertiseChecked = document.querySelectorAll('input[name="expertise[]"]:checked');
   if (expertiseChecked.length === 0) {
     alert('Please select at least one area of expertise.');
+    return;
+  }
+
+  // Validate resume is uploaded
+  if (!resumeFileUrl) {
+    alert('Please upload your resume before submitting.');
     return;
   }
 
@@ -687,16 +721,10 @@ document.getElementById('consultant-profile-form').addEventListener('submit', as
       tools: this.querySelector('[name="tools"]').value,
       industries: Array.from(document.querySelectorAll('input[name="industries[]"]:checked')).map(cb => cb.nextElementSibling.textContent.trim()),
       referral_source: this.querySelector('[name="referral_source"]').value,
-      additional_info: this.querySelector('[name="additional_info"]').value
+      additional_info: this.querySelector('[name="additional_info"]').value,
+      resume_url: resumeFileUrl,
+      resume_name: resumeFileName
     };
-
-    // Handle resume file - convert to base64 for now (note: for production, use a file upload service)
-    const resumeInput = this.querySelector('[name="resume"]');
-    if (resumeInput.files.length > 0) {
-      // For now, we'll note that a resume was uploaded but can't attach it directly
-      // A proper solution would use Cloudinary, S3, or similar
-      formData.resume_note = 'Resume uploaded: ' + resumeInput.files[0].name;
-    }
 
     // Submit to API
     const response = await fetch('/api/submit-application', {
