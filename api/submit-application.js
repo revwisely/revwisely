@@ -21,28 +21,36 @@ export default async function handler(req, res) {
   try {
     const data = req.body;
 
-    // Build the Airtable record
+    // Build the Airtable record - only include fields with values
     const fields = {
-      'First Name': data.first_name || '',
-      'Last Name': data.last_name || '',
-      'Email': data.email || '',
-      'Phone': data.phone || '',
-      'City': data.city || '',
-      'State/Country': data.state_country || '',
-      'LinkedIn': data.linkedin || '',
-      'Job Title': data.job_title || '',
-      'Company': data.company || '',
-      'Years Experience': data.years_experience || '',
-      'Education': data.education || '',
-      'Professional Summary': data.summary || '',
-      'Expertise Areas': data.expertise || [],
-      'Tools & Platforms': data.tools || '',
-      'Industries': data.industries || [],
-      'Referral Source': data.referral_source || '',
-      'Additional Info': data.additional_info || '',
       'Submitted At': new Date().toISOString(),
-      'Status': 'New'
+      'Status': 'Todo'
     };
+
+    // Text fields - only add if they have a value
+    if (data.first_name) fields['First Name'] = data.first_name;
+    if (data.last_name) fields['Last Name'] = data.last_name;
+    if (data.email) fields['Email'] = data.email;
+    if (data.phone) fields['Phone'] = data.phone;
+    if (data.city) fields['City'] = data.city;
+    if (data.state_country) fields['State/Country'] = data.state_country;
+    if (data.linkedin) fields['LinkedIn'] = data.linkedin;
+    if (data.job_title) fields['Job Title'] = data.job_title;
+    if (data.company) fields['Company'] = data.company;
+    if (data.years_experience) fields['Years Experience'] = data.years_experience;
+    if (data.education) fields['Education'] = data.education;
+    if (data.summary) fields['Professional Summary'] = data.summary;
+    if (data.tools) fields['Tools & Platforms'] = data.tools;
+    if (data.referral_source) fields['Referral Source'] = data.referral_source;
+    if (data.additional_info) fields['Additional Info'] = data.additional_info;
+
+    // Multi-select fields - only add if array has items
+    if (data.expertise && Array.isArray(data.expertise) && data.expertise.length > 0) {
+      fields['Expertise Areas'] = data.expertise;
+    }
+    if (data.industries && Array.isArray(data.industries) && data.industries.length > 0) {
+      fields['Industries'] = data.industries;
+    }
 
     // Handle resume file - Uploadcare provides a CDN URL
     if (data.resume_url) {
